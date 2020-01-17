@@ -1,0 +1,48 @@
+syntax = "proto2";
+
+package test;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "TestProto";
+
+message ComboNode{
+    required int32 comboNode = 1;
+    optional int64 userId = 2;
+	optional int64 yaw = 3;
+	optional int32 x = 4;
+    optional int32 y = 5;
+    optional int32 z = 6;
+	optional int32 rockerX = 7;
+    optional int32 rockerY = 8;
+	optional int32 controllerPitch   = 9;
+	optional int32 controllerYaw    = 10;
+	optional int32 controllerRoll   = 11;
+}
+
+message ComboPostionDif{
+    required int32 x = 1;
+    required int32 y = 2;
+    required int32 z = 3;
+    optional int64 userId = 4;
+}
+
+message ComboEnd{
+    optional int32 userId = 1;
+	optional int32 x = 2;
+    optional int32 y = 3;
+    optional int32 z = 4;
+}
+
+message RotateYaw{
+    optional int64 useId = 1;
+    required int32 yaw   = 2;
+    required int32 time  = 3;
+}
+
+message ReqUpdateView{
+
+}
+
+message RoleInfo{
+    required int64 rid  = 1;
+}

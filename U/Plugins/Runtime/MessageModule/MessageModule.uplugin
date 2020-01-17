@@ -1,0 +1,23 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "MessageModule",
+	"Description": "MessageModule",
+	"Category": "Other",
+	"CreatedBy": "XiaoHaiLin",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "MessageModule",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}

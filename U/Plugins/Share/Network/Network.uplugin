@@ -1,0 +1,37 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.0",
+  "FriendlyName": "Network",
+  "Description": "Network base module",
+  "Category": "Game",
+  "CreatedBy": "Wangpeng",
+  "CreatedByURL": "",
+  "DocsURL": "",
+  "MarketplaceURL": "",
+  "SupportURL": "",
+  "CanContainContent": false,
+  "IsBetaVersion": false,
+  "Installed": false,
+  "SupportedPrograms": [
+    "Server"
+  ],
+  "Modules": [
+    {
+      "Name": "Network",
+      "Type": "RuntimeAndProgram",
+      "LoadingPhase": "PostConfigInit",
+      "WhitelistPlatforms": [
+        "Win64",
+        "Win32",
+        "Linux",
+        "Mac",
+        "Android",
+        "IOS"
+      ],
+      "WhitelistPrograms": [
+        "Server"
+      ]
+    }
+  ]
+}

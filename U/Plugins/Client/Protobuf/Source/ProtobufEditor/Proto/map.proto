@@ -1,0 +1,485 @@
+syntax = "proto2";
+
+package mapV2;
+//import "fight.proto";
+//import "duplicate.proto";
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "MapProto";
+
+message PerformerEquipBean {
+	optional int32 equipIndex = 1;  //装备索引
+	optional int32 itemId = 2; //道具id
+}
+
+message PerformerFashionBean {
+    optional int32 fashionType = 1;//时装类型
+	optional int32 fashionId = 2;//时装id
+}
+
+message RoundItemInfo {
+	optional int64 lid = 1;  //Id
+	optional int32 itemId = 2; //道具Id
+	optional int32 count = 3;//数量
+	optional int64 ownerId = 4; //归属id
+	optional float x = 5;
+	optional float y = 6;
+	optional float z = 7;
+	optional int64 dropTime = 8; //掉落时间
+	optional int64 ownerTeamId = 9; //归属组队 id
+	optional int64 dropFrom = 10; //从哪个怪上掉的
+	optional int64 totalTime = 11; //总时间
+}
+
+message NoticeBean {
+    optional int32 updateType = 1;//更新类型 1最大血量 2当前血量 3最大魔法 4当前魔法 5最大内功 6当前内功 7当前等级 8最大战斗力
+	optional int64 updateValue = 2;//更新值
+}
+
+message RoundEventInfo {
+	optional int64 lid = 1; //Id
+	optional int64 eventId = 2; //事件Id
+	optional float x = 3;
+	optional float y = 4;
+	optional float z = 5;
+}
+
+message RoundBufferInfo {
+	optional int64 lid = 1; //buffer唯一Id
+	optional int32 bufferId = 2; //buffer配置Id
+	optional float x = 3;
+	optional float y = 4;
+	optional float z = 5;
+	optional bool isCenterPoint = 6;
+}
+
+message RoundPlayerInfo {
+    optional int64 lid = 1;//id
+	optional float x = 2;
+	optional float y = 3;
+	optional float z = 4;
+	optional float dir = 5;//朝向
+	optional string name = 6;//名称
+	optional int32 level = 7;//等级
+	optional int32 career = 8;//职业
+	optional int32 sex = 9;//性别
+	optional int64 hp = 10;//血量
+	optional int64 maxHp = 11;//最大血量
+	optional int32 inner = 12;//内功
+	optional int32 innerMax = 13;//内功最大值
+	optional int64 teamId = 14;//队伍id
+	optional int32 master = 15;//手动控制角色
+	repeated PerformerEquipBean equipBean = 16;//装备信息
+	//repeated fightV2.BufferInfo buffers = 17;//buffer信息
+	optional int32 wing = 18;//翅膀
+	optional int64 rid = 19;//玩家id
+	optional int64 unionId = 20;//帮会id
+	optional string unionName = 21;//帮会名字
+	optional int32 titleId = 22;
+	optional int32 nbValue = 23; //战力
+	optional int32 power = 24;
+	optional int64 mp = 25;//魔法值
+	optional int64 maxMp = 26;//最大魔法值
+	optional int32 nbValueMax = 27;//历史最大战斗力
+	optional int32 boxTime = 28; //宝箱剩余时间
+	optional int32 tokenCount = 29; //特定副本的通行证数量
+	optional int32 tokenCountId = 30;//特定副本的通行证ID
+	//optional duplicateV2.CavesPlayerInfo cavesPlayerInfo= 31;//洞窟副本的玩家信息
+	optional int32 thisJunXianId = 32;//军衔ID
+}
+
+message RoundMonsterInfo {
+  optional int64 lid = 1;//id
+	optional int32 mid = 2;//怪物配置id
+	optional float x = 3;
+	optional float y = 4;
+	optional float z = 5;
+	optional float dir = 6;//朝向
+	optional int64 hp = 7;//血量
+	optional int64 maxHp = 8;//最大血量
+	optional string name = 9; //怪物名称
+	optional int32 level = 10; //怪物等级
+	//repeated fightV2.BufferInfo buffers = 11;//buffer信息
+	optional int64 endAnimation = 12;//预警怪物结束出生动画的时间
+	optional int64 deathTime = 13;//怪物死亡时间
+	optional int64 killId = 14;//凶手
+}
+
+//npc 进入视野
+message RoundNpcInfo {
+	optional int64 lid = 1; //npc唯一Id
+	optional int32 nid = 2;  //npc配置Id
+	optional int32 mapNpcId = 3;//NPC配置中的唯一ID
+	optional float x = 4;
+	optional float y = 5;
+	optional float z = 6;
+	optional float dir = 7; //朝向
+}
+
+message RoundPetInfo {
+	optional int64 lid = 1; //宠物唯一Id
+	optional int64 masterId = 2; //主人的id
+	optional string name = 3; //名字
+	optional int32 mid = 4; //宠物配置Id
+	optional float x = 5;
+	optional float y = 6;
+	optional float z = 7;
+	optional float dir = 8; //朝向
+	optional int64 hp = 9;   //血量
+	optional int64 maxHp = 10;//最大血量
+}
+
+message RoundHeroInfo {
+	optional int64 lid = 1;
+	optional int64 masterId = 2; //主人的id
+	optional string name = 3; //名称
+	optional int32 career = 4;//职业
+	optional int32 sex = 5;//性别
+	optional int32 mid = 6;//怪物配置id
+	optional float x = 7;
+	optional float y = 8;
+	optional float z = 9;
+	optional float dir = 10;//朝向
+	optional int64 hp = 11;//血量
+	optional int64 maxHp = 12;//最大血量
+	optional int32 inner = 13; //内功
+	optional int32 innerMax = 14;//内功最大值
+	optional int32 maBiRate = 15;//麻痹百分比
+}
+
+message RoundServantInfo {
+	optional int64 id = 1;
+	optional int64 masterId = 2; //主人的id
+	optional string name = 3; //名称
+	optional int32 career = 4;//职业
+	optional int32 sex = 5;//性别
+	optional int32 mid = 6;//怪物配置id
+	optional float x = 7;
+	optional float y = 8;
+	optional float z = 9;
+	optional float dir = 10;//朝向
+	optional int64 hp = 11;//血量
+	optional int64 maxHp = 12;//最大血量
+	optional int32 level = 13;//等级
+}
+
+message RoundCollectPoint {
+	optional int64 id = 1;
+	optional int32 type = 2; //
+	optional float x = 3;
+	optional float y = 4;
+	optional float z = 5;
+	optional int32 configId = 6;
+}
+
+message MapBoss {
+    optional int64 bossId = 1;// bossId
+	optional int32 mid = 2;//boss配置id
+	optional int64 bossHp = 3;//boss剩余血量
+	optional float x = 4;
+	optional float y = 5;
+	optional float z = 6;
+}
+
+message MonsterTomb {
+    optional int64 lid = 1;
+	optional int32 mid = 2;//怪物配置id
+	optional float x = 3;
+	optional float y = 4;
+	optional float z = 5;
+	optional int32 nextReliveTime = 6;//下次复活时间（s）
+}
+
+//更新视野
+message ResUpdateView {
+	repeated RoundPlayerInfo addPlayers = 1;    //周围玩家
+	repeated RoundMonsterInfo addMonsters = 2;  //周围怪物
+	repeated RoundNpcInfo addNpcs = 3;          //周围NPC
+	repeated RoundBufferInfo addBuffers = 4;    //周围buffer
+	repeated RoundPetInfo addPets = 5;          //周围宠物
+	repeated RoundHeroInfo addHeros = 6;        //周围英雄
+	repeated RoundEventInfo addEvents = 7;      //周围事件
+	repeated RoundItemInfo addItems = 8;        //周围道具
+	repeated int64 exitIdList = 9;              //移除的对象id
+	repeated RoundServantInfo addServants = 10;        //周围幻兽
+	repeated RoundCollectPoint collectPoint = 11; //采集点
+}
+
+message ResPlayerEnterView {
+    required RoundPlayerInfo player = 1;//进入视野的玩家
+}
+
+message ResCollectEnterView {
+    required RoundCollectPoint collect = 1;//进入视野的玩家
+}
+
+//buff进入视野
+message ResBufferEnterView {
+   required RoundBufferInfo buffer = 1;
+}
+
+message ResMonsterEnterView {
+   required RoundMonsterInfo monster = 1;
+}
+
+message ResNpcEnterView {
+   required RoundNpcInfo npc = 1;
+}
+
+//宠物进入视野
+message ResPetEnterView {
+    required RoundPetInfo pet = 1;
+}
+
+//英雄进入视野
+message ResHeroEnterView {
+    required RoundHeroInfo hero = 1;
+}
+//幻兽
+message ResServantEnterView {
+    required RoundServantInfo servant = 1;
+}
+
+//场景对象离开视野
+message ResMapObjectExitView {
+    optional int64 lid = 1;
+}
+
+//玩家进入地图
+message ResPlayerEnterMap {
+    optional int64 lid = 1;//id
+	optional float x = 2;
+	optional float y = 3;
+	optional float z = 4;
+	optional float dir = 5;//朝向
+	optional int32 hp = 6;//血量
+	optional int32 mp = 7;//魔法值
+}
+
+//玩家切换地图
+message ResPlayerChangeMap {
+	optional int32 mid = 1; //地图id
+	optional int32 line = 2; //分线
+	optional float x = 3;
+	optional float y = 4;
+	optional float z = 5;
+}
+
+//切换位置
+message ResChangePos {
+	optional int64 lid = 1;
+	optional float x = 2;
+	optional float y = 3;
+	optional float z = 4;
+	optional int32 reason = 5; //原因
+	optional int32 waiGuaCanMoveTime = 6; //外挂还能移动的时间(s)
+}
+
+//视野范围内物体移动
+message ResObjectMove {
+	optional int64 lid = 1;
+	optional float x = 2;
+	optional float y = 3;
+	optional float z = 4;
+}
+
+//事件进入视野
+message ResEventEnterView {
+     optional RoundEventInfo info = 1;
+}
+
+//对象复活
+message ResRelive {
+	optional int64 lid = 1;
+	optional int64 hp = 2;
+	optional int32 mp = 3;
+	optional int32 inner = 4;
+}
+
+//道具进入视野
+message ResItemEnterView {
+    optional RoundItemInfo info = 1;
+}
+
+//对象装备信息发生变化
+message ResUpdateEquip {
+	optional int64 lid = 1; //id
+	optional PerformerEquipBean equip = 2; //变化的装备 为空说明没有装备了
+}
+//玩家尝试进入地图
+message TryEnterMapRequest {
+  required int32 mid = 1;
+	required int32 line =2; //地图分线
+}
+
+//玩家尝试进入地图
+message ResTryEnterMap {
+    required int32 mid = 1;
+	required int32 line =2; //地图分线
+	optional bool reconnect=3; //是否断线重连上来
+}
+
+//通知客户端改变操作的玩家对象
+message ResChangePlayer {
+    required int64 playerId = 1;//player id
+}
+
+//通知其他玩家某个英雄的控制发生变化
+message ResReplacePlayer {
+    required int64 oldId = 1;//老的控制id
+	required int64 newId = 2;//新的控制id
+}
+
+
+//同步boss归属信息
+message ResBossOwner {
+    optional int64 bossId = 1;//boss唯一id
+	optional int64 lid = 2;//归属者id
+	optional string name = 3;//归属者名称
+	optional int64 unionId = 4;//归属者帮会id
+	optional string unionName = 5;//帮会名
+	optional int32 sex = 6;
+	optional int32 career = 7;
+	optional float x = 8;
+	optional float y = 9;
+	optional float z = 10;
+}
+
+//玩家翅膀变化
+message ResPlayerWingChange {
+    required int64 lid = 1;
+	required int32 wing = 2;//等级
+}
+
+//玩家帮会变化
+message ResPlayerUnionChange {
+    required int64 lid = 1;
+	required int64 unionId = 2;//帮会id
+	required string unionName = 3;
+}
+
+//请求复活
+message PlayerReliveRequest {
+    required int32 reliveType = 1;//1、自动复活（走配置配置是啥，就是啥），2、原地复活
+}
+
+//玩家死亡次数信息
+message ResPlayerReliveInfo {
+    required int32 dieCount = 1;//死亡次数
+	required int32 autoReliveTime = 2;//自动复活剩余时间
+}
+
+//玩家时装变化
+message ResPlayerFashionChange {
+    required int64 lid = 1;
+	required int32 fashionType = 2;//时装类型
+	required int32 int32 = 3;//时装id
+}
+
+//玩家军衔变化
+message ResPlayerJunxianChange {
+    required int64 lid = 1;
+	required int32 junxianLevel = 2;//军衔等级
+}
+
+//请求切换攻击模式
+message SwitchFightModelRequest {
+    required int32 fightModel = 1;//攻击模式 0和平 1组队 2帮会 3善恶 4全体 5阵营
+}
+
+//返回选择攻击模式
+message ResSwitchFightModel {
+    required int32 fightModel = 1;//攻击模式 0和平 1组队 2帮会 3善恶 4全体 5阵营
+}
+
+//拾取地图道具
+message PickUpMapItemRequest {
+    required int64 objId = 1;//地面道具的唯一id
+}
+
+//通知场景变化消息
+message ResNoticeViewTypeInfo {
+    required int64 lid = 1;
+	repeated NoticeBean updateList = 2;//更新列表
+}
+
+//同步boss和玩家总血量信息
+message ResAllPerformerTotalHp {
+    repeated MapBoss mapBossList = 1;//地图所有boss信息
+	repeated int64 playerId = 2;//玩家id
+	repeated bytes percent = 3;//血量百分比
+	repeated bytes percentIp = 4;//内功百分比
+}
+
+//同步玩家威压信息
+message ResPressureValue {
+    required int32 pressure = 1;//威压
+}
+
+//请求boss归属
+message BossOwnerRequest {
+    required int64 bossId = 1;//boss唯一id
+}
+
+//同步boss复活信息
+message BossReliveTime {
+    required int64 bossId = 1;
+	required int32 reliveTime = 2;//复活时间（时间戳，单位秒）
+}
+
+//玩家神装变化
+message ResPlayerSzSuitChange {
+    required int64 lid = 1;
+	required int32 suit = 2;//神装套装
+}
+
+//玩家传说变化
+message ResPlayerLegendChange {
+    required int64 lid = 1;
+	required int32 type = 2;//类型  1武器 5神甲
+	required int32 legendLevel = 3;//等级
+}
+
+//镖车是否在移动
+message ResCartMove {
+   required int32 state = 1;//1移动，0不移动
+}
+
+//返回墓碑信息
+message ResTombInfo {
+    repeated MonsterTomb tombInfos = 1;//墓碑列表
+}
+
+//请求采集操作
+message GatherOperatorRequest {
+    required int32 type = 1;//1 采集的类型 1挖肉；2尸体挖掘；3挖矿；4采药植；5收集宝箱
+	required int64 lid = 2;//被采集对象唯一id
+}
+
+//返回采集数据
+message ResGatherState {
+	optional int64 roleId = 1;
+	optional int32 type = 2;
+	optional int32 time = 3; //采集读秒时间
+	optional int32 state = 4;//1开始采集 2中断采集 3结束采集
+	optional bool isMonster = 5;//怪物只做采集动作
+	optional float x = 6;
+	optional float y = 7;
+	optional float z = 8;
+	optional int64 deadTime = 9;//怪物的死亡时间
+	optional int64 ownerId = 10;//5秒内采集人的ID
+	optional int64 lid = 11;//采矿点的ID
+}
+
+message ReqClickEvent {
+	required int64 groundEventId = 1; //要点击的事件的唯一 id
+}
+
+
+//返回地图对象死亡状态
+message ResObjectDeadTime {
+	optional int64 id = 1;
+	optional int64 killid = 2;
+	optional string killName = 3;
+	optional int64 deadTime = 4;
+}

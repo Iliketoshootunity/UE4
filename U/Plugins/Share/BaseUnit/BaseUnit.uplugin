@@ -1,0 +1,32 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.0",
+  "FriendlyName": "BaseUnit",
+  "Description": "common base class",
+  "Category": "Game",
+  "CreatedBy": "Wangpeng",
+  "CreatedByURL": "",
+  "DocsURL": "",
+  "MarketplaceURL": "",
+  "SupportURL": "",
+  "CanContainContent": false,
+  "Installed": true,
+  "SupportedPrograms": [ "Server" ],
+  "Modules": [
+    {
+      "Name": "BaseUnit",
+      "Type": "RuntimeAndProgram",
+      "LoadingPhase": "PostConfigInit",
+      "WhitelistPlatforms": [
+        "Win64",
+        "Win32",
+        "Linux",
+        "Mac",
+        "Android",
+        "IOS"
+      ],
+      "WhitelistPrograms": [ "Server" ]
+    }
+  ]
+}

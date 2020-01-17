@@ -1,0 +1,31 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.0",
+  "FriendlyName": "Shared",
+  "Description": "Game Client And Server Interface",
+  "Category": "Game",
+  "CreatedBy": "Wangpeng",
+  "CreatedByURL": "",
+  "DocsURL": "",
+  "MarketplaceURL": "",
+  "SupportURL": "",
+  "CanContainContent": false,
+  "IsBetaVersion": false,
+  "Installed": false,
+  "Modules": [
+    {
+      "Name": "Shared",
+      "Type": "RuntimeAndProgram",
+      "LoadingPhase": "PostConfigInit",
+      "WhitelistPlatforms": [
+        "Win64",
+        "Win32",
+        "Linux",
+        "Mac",
+        "Android",
+        "IOS"
+      ]
+    }
+  ]
+}

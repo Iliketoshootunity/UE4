@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+import "enum.proto";
+
+message FPingRet
+{
+	int32 stime = 1;
+}
+
+message FLoginRet
+{
+	int64 Result = 1;
+};
+
+//登录返回
+message ResLogin {
+     int64 userId = 1;
+}
+
+//其他人登录
+message ResOtherLogin{
+   int64 userId = 1; 
+}
+
+//其他人登录情况
+message ResLoginInfo{
+  repeated int64 userId = 1; 
+}
+
+//断开连接
+message ResDisconnectInfo{
+   int64 userId = 1; 
+}

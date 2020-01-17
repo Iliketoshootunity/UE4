@@ -1,0 +1,184 @@
+syntax = "proto2";
+
+package fightV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "FightProto";
+
+message BufferInfo {
+	optional int32 bufferId = 1; //唯一id
+	optional int32 bufferConfigId = 2; //配置id
+	optional int64 addTime = 3;
+	optional int64 totalTime = 4;//持续时间,毫秒数
+	optional int64 roleId = 5;
+}
+
+message HurtTarget{
+	optional int64 targetId = 1;
+	optional int64 hp = 2;//当前血量
+	optional int64 showHurt = 3;//显示伤害
+	optional int32 inner = 4;//当前内功
+	repeated BufferInfo bufferList = 5;//增加的buff列表
+	optional int32 specAtt = 6;//触发的特效
+	optional int32 hurtType = 7;//伤害类型
+	optional int32 effectType = 8;//攻击类型, 1伤害, 2质量, 3空
+	optional bool isDodge = 9; //是否闪避
+	optional bool isCritical = 10; //是否暴击
+	optional float x = 11;
+	optional float y = 12;
+	optional float z = 13;
+	optional float targetDir = 14;		//被攻击者预期受击位置Z,服务器验证之后替换
+}
+
+//请求攻击
+message FightRequest {
+	required int32 skillId = 1;
+	optional int64 targetId = 2;
+	optional float x = 3;
+	optional float y = 4;
+	optional float z = 5;
+	optional float moveX = 6;
+	optional float moveY = 7;
+	optional float moveZ = 8;
+	optional float targetX = 9;		//被攻击者预期受击位置X,服务器验证之后替换
+	optional float targetY= 10;		//被攻击者预期受击位置Y,服务器验证之后替换
+	optional float targetZ = 11;		//被攻击者预期受击位置Z,服务器验证之后替换
+	optional float targetDir = 12;		//被攻击者预期受击位置Z,服务器验证之后替换
+	optional int32 comboId = 13;	//ComboId
+	optional int32 hitPerformaceId = 14;
+	optional int64 controllerId = 15;
+}
+
+message FightTestContrllerNull{
+        optional int64 targetId = 1;
+}
+
+//返回攻击
+message ResFightResult {
+	required int32 skillId = 1;
+	optional int64 attackerId = 2;//攻击者
+	optional int64 targetId = 3;//被攻击者
+	optional float x = 4;
+	optional float y = 5;
+	optional float z = 6;
+	repeated HurtTarget hurtList = 7;//受击列表
+	optional int32 mp = 8;//当前魔法值
+	optional int32 skillExp = 9;
+	optional float moveX = 10; //攻击者移动位置
+	optional float moveY = 11; 
+	optional float moveZ = 12;
+	optional int32 comboId = 13;	//ComboId
+	optional int32 hitPerformaceId = 14;
+	optional int64 controllerId = 15;
+}
+
+//血量蓝量发生变化（用于单独的通知血量，比如说buffer伤害等等）
+message ResHpMpChange {
+    required int64 lid = 1;
+	optional int64 hp = 2;//当前血量
+	optional int32 mp = 3;//当前蓝量
+	optional int64 maxHp = 4;
+	optional int32 maxMp = 5;
+}
+
+//死亡消息（用于单独的通知对象的死亡,比如说buffer伤害等等）
+message ResObjectDie {
+    required int64 lid = 1;
+	required int64 killerId = 2;//击杀者id
+}
+
+//同步玩家总血量的百分比
+message ResPlayerTotalHpPercnet {
+    required bytes percent = 1;//总血量的百分比
+}
+
+//内功发生变化（用于单独的通知内功，内功回复）
+message ResInnerChange {
+    required int64 lid = 1;
+	optional int64 inner = 2;//当前内功
+}
+
+//返回守护攻击
+message ResShouHuAttack {
+    required int32 shouhuId = 1;//守护配置id
+	required int64 ownerId = 2;//归属者id
+	optional int32 buffId = 3;//触发buffId
+}
+
+//同步玩家总魔法值的百分比
+message ResPlayerTotalMagicPercnet {
+    required bytes percent = 1;//总魔法值的百分比
+}
+
+//返回禁疗消息
+message ResBanCure {
+    required int64 targetId = 1;
+}
+
+message SkillMoveInfo{
+	required int64 attackId = 1; //攻击者
+	optional int32 type = 2;//1：抗拒 2：野蛮
+	repeated SkillMove moveInfo = 3;//改变列表
+}
+
+//技能位移返回
+message SkillMove{
+	required int64 targetId = 1;
+	required int32 x = 2;
+	required int32 y = 3;
+}
+
+enum PropertyType {
+	maxHp = 1;
+	maxMp = 2;
+	innerPowerMax = 3;
+	phyAttackMin = 4;
+	phyAttackMax = 5;
+	magicAttackMin = 6;
+	magicAttackMax = 7;
+	taoAttackMin = 8;
+	taoAttackMax = 9;
+	phyDefMin = 10;
+	phyDefMax = 11;
+	magicDefMin = 12;
+	magicDefMax = 13;
+	critical = 14;
+	criticalDamage = 15;
+	accurate = 16;
+	dodge = 17;
+	heathRecover = 18;
+	magicRecover = 19;
+	innerPowerRecover = 20;
+	luck = 21;
+	resistanceCrit = 22;
+	hurtAdd = 23;
+	relief = 24;
+	innerRelief = 25;
+	holyAttack = 26;
+	attackSpeed = 27;
+	pkAtt = 28;
+	pkDef = 29;
+	nbValue = 30;
+}
+
+
+message ComboNode{
+    required int32 comboNode = 1;		//Combo节点
+    optional int64 id = 2;			//攻击者ID,发送端不需要发送，服务器同步除发送端之外的
+    optional float dir = 3;		        //角色 方向
+    optional float x = 4;			//角色 坐标X
+    optional float y = 5;			//角色 坐标Y
+    optional float z = 6;			//角色 坐标Z
+    optional float rockerX = 7;			//操纵摇杆X
+    optional float rockerY = 8;			//操纵摇杆Y
+    optional float controllerYaw = 9;		//控制器旋转Yaw值
+    optional float targetDir = 10;              //目标方向
+    optional float maxRotate = 11;              //最大旋转
+}
+
+message ComboEnd{
+    optional int64 id = 1;			//攻击者ID,发送端不需要发送，服务器同步除发送端之外的
+    optional float x  = 2;				//角色 坐标X
+    optional float y  = 3;				//角色 坐标Y
+    optional float z  = 4;				//角色 坐标Z
+}

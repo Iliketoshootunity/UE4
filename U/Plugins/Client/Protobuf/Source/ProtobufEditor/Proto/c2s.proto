@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+import "enum.proto";
+
+message FPing
+{
+	float ctime = 1;
+}
+
+message FLogin
+{
+	string user = 1;
+	string password = 2;
+}
+
+message Common
+{
+	int32 length = 1;
+	int32 type = 2;
+	bytes mark = 3;
+	string data = 4;
+}
+
+message LoginReq {
+	string loginName = 1; //登录账户名
+	int32 sid = 2; //服务器id
+	int32 pid = 3; //平台id
+	int32 client = 4; //登录方式（1、网页，2、微端），根据情况可以干掉
+	string idNumber = 5; //身份证号码
+	string ip = 6; //ip地址(根据情况，可以删除）
+	int32 version = 7; //客户端版本号
+	string channelId = 8; //h5游戏的字段、根据情况可以删除
+	string qudao = 9; //导量渠道
+	int32 isAdult = 10; //h5游戏字段(1 已认证 0 未认证)，根据情况可以删除
+	string token = 11; //登录验证码,根据情况可以删除
+}
+
+message ReqLoginInfoMessage {
+
+}
+
+message ReqComboNodeMessage {
+	int32 ComboNode = 1;
+}
+
+message ReqComboPostionDifMessage {
+	int32 X = 1;
+	int32 Y = 2;
+	int32 Z = 3;
+}
+

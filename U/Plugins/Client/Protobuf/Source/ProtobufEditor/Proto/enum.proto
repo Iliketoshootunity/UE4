@@ -1,0 +1,14 @@
+syntax = "proto3";
+option optimize_for = SPEED;
+
+enum c2s_PROTOCOL
+{
+	c2s_ping = 0;
+	c2s_login = 1001;
+}
+
+enum s2c_PROTOCOL
+{
+	s2c_ping = 0;
+	s2c_login = 1007;
+}

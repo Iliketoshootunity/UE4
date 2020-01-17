@@ -1,0 +1,82 @@
+syntax = "proto2";
+
+package moveV2;
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "MoveProto";
+
+message ReqMove{
+	optional float x = 1;
+	optional float y = 2;
+	optional float z = 3;
+	optional float oX = 4;
+	optional float oY = 5;
+	optional float oZ = 6;
+	optional int32 action = 7;
+	optional float dir = 8; // 朝向朝向以Y轴旋转角度
+	optional float speed = 9;
+}
+
+message ResMove{
+	optional int64 lid = 1;//对象id
+	optional float x = 2;
+	optional float y = 3;
+	optional float z = 4;
+	optional int32 action = 5;
+	optional float dir = 6; // 朝向以Y轴旋转角度
+	optional bool isIdle = 7; //是否是idle状态
+	optional float speed = 8;
+}
+
+
+//同步位置
+message ReqSynPosition{
+	optional int64 id = 1;
+	optional float x = 2;
+	optional float y = 3;
+	optional float z = 4;
+	optional float dir = 5; // 朝向朝向以Y轴旋转角度
+}
+
+//玩家移动
+message ReqPlayerMoveRequest {
+	optional float x = 1;
+	optional float y = 2;
+	optional float z = 3;
+	optional int64 startTime = 4;
+	optional int32 action = 5;
+	optional int32 currentX = 6;  //不需要
+	optional int32 currentY = 7;  //不需要
+}
+
+//请求改变朝向
+message ReqChangeDir{
+    optional bytes dir = 1;//朝向
+}
+
+//返回改变朝向
+message ResChangeDir{
+    optional int64 lid = 1;//对象id
+    optional bytes dir = 2;//朝向
+}
+
+//玩家移动
+message ReqPlayerWalk{
+    optional float x = 1;
+    optional float y = 2;
+    optional float z = 3;
+    optional float dirX = 4;
+    optional float dirY = 5;
+    optional float dirZ = 6;
+}
+
+//玩家移动
+message ResPlayerWalk{
+    optional float x = 1;
+    optional float y = 2;
+    optional float z = 3;
+    optional float dirX = 4;
+    optional float dirY = 5;
+    optional float dirZ = 6;
+    optional int64 id   = 7;
+}

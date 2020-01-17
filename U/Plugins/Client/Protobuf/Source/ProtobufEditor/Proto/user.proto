@@ -1,0 +1,151 @@
+syntax = "proto2";
+
+package userV2;
+
+//import "role.proto";
+
+option java_package = "com.sh.game.proto";
+option java_outer_classname = "UserProto";
+
+
+//请求登录
+message ReqLogin {
+  required string loginName = 1;//登录账户
+  optional int32 sid = 2;//服务器ID
+  optional int32 platformId = 3;//平台ID
+  optional int32 client = 4;//登录方式（1、网页，2、微端）
+  optional string IDNumber = 5;//身份证号码
+  // optional string ip = 6;//ip地址
+  optional int32 version = 7;//版本号
+  // optional string channelId = 8; //channelId
+  // optional string qudao = 9; //渠道
+  optional int64 time = 10; //登录验证返回的时间戳
+  optional string sign = 11; //登录验证返回的 sign
+}
+
+//登录返回
+message ResLogin {
+    //repeated roleV2.RoleToOtherInfo roleList = 1; //角色列表
+    optional int64 userId = 1;
+}
+
+//告知客户端需要创建角色
+message ResCreateRole{
+	optional int64 uid = 1;
+	optional string randomRoleName = 2;//随机名字
+}
+
+//请求创建角色
+message ReqCreateRole{
+	optional string roleName = 1;//角色名字
+	optional int32 sex = 2;//性别
+	optional int32 career = 3;//职业
+}
+
+//随机性别
+message ReqRandomName{
+	optional int32 sex = 1;//性别
+}
+
+//随机名字
+message ResRandomName{
+	optional string roleName = 1;//角色名字
+}
+
+//角色名字
+message ResRoleName {
+	optional string name = 1;
+}
+
+//告知客户端进入游戏
+message ResEnterGame{
+	optional int64 uid = 1;//玩家id
+	optional string uidStr = 2; //玩家id的字符串
+	optional int64 serverTime = 3;//服务器时间
+}
+
+//心跳请求
+message ReqHeart{
+	optional int64 clientTime = 1; //客户端时间
+}
+
+//心跳返回
+message ResHeart{
+	optional int64 nowTime = 1;  //服务器当前时间
+	optional int64 clientTime = 2;
+}
+
+
+//请求只带玩家id的消息
+message ReqRoleId {
+   optional int64 roleId = 1;
+}
+//用户Id信息
+message ResUserIdInfo {
+	optional int64 userId = 1;
+}
+
+//版本返回信息
+message ResVersionError {
+	optional int32 version = 1; //版本
+}
+
+
+//断线响应
+message DisconnectResponse{
+   optional int32 reason = 1;  //	0:维护 1:封禁 2:其他设备登录 3:心跳踢除	4:断线
+}
+
+
+//删除角色
+message ResDeleteRole{
+    optional int64 roleId = 1;
+}
+
+//删除角色
+message ReqDeleteRole{
+    optional int64 roleId = 1;
+}
+
+//断线重连
+message ReqReconnect {
+  optional string loginName = 1;//登录账户
+  optional int32 sid = 2;//服务器ID
+  optional int32 platformId = 3;//平台ID
+  optional int32 client = 4;//登录方式（1、网页，2、微端）
+  // optional string ip = 6;//ip地址
+  optional int32 version = 7;//版本号
+  // optional string channelId = 8; //channelId
+  // optional string qudao = 9; //渠道
+  optional int64 roleId = 10;
+  optional int64 time = 11;
+  optional string sign = 12;
+}
+
+//返回robotGM
+message ResRobotGM {
+  optional int32 type = 1;// gm指令类型 1清空robot，2添加n个robot
+  optional int32 mapId = 2;//人物所在的地图
+  optional int32 line = 3;
+  optional float x = 4;//人物所在的坐标
+  optional float y = 5;
+  optional float z = 6;
+  optional bool isUseSkill = 7; //是否能放技能:true放
+  optional bool isClear = 8;// 是否清空robot :true清空
+  optional int32 addCount = 9;//添加robot数量
+}
+
+//其他人登录
+message ResOtherLogin{
+  optional int64 userId = 1; 
+}
+
+//其他人登录情况
+message ResLoginInfo{
+  repeated int64 userId = 1; 
+}
+
+//断开连接
+message ResDisconnectInfo{
+  optional int64 userId = 1; 
+}
